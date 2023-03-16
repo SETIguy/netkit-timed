@@ -573,9 +573,10 @@ main(int argc, char **argv)
 			justquit = 1;
 		}
 		for (ntp = nettab; ntp != NULL; ntp = ntp->next) {
-			if (ntp->status == MASTER)
-				rmnetmachs(ntp);
-				ntp->status = NOMASTER;
+			/* I'll assume the function was correct
+			   and the indentation was wrong */
+			if (ntp->status == MASTER) rmnetmachs(ntp);
+			ntp->status = NOMASTER;
 		}
 		checkignorednets();
 		pickslavenet(0);
@@ -898,8 +899,14 @@ add_good_host(char* name,
 void
 get_goodgroup(int force)
 {
-# define NG_DELAY (30*60*CLK_TCK)	/* 30 minutes */
-	static unsigned long last_update = -NG_DELAY;
+	/* CLK_TCK isn't a constant on some systems */
+        #define NG_DELAY (30*60*CLK_TCK)	/* 30 minutes */
+	static unsigned long last_update; 
+	static int init=1;
+	if (!init) {
+		last_update=-NG_DELAY;
+		init=1;
+	}
 	unsigned long new_update;
 /*	struct hosttbl *htp; */
 	struct goodhost *ghp, **ghpp;

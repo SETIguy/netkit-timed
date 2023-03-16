@@ -89,6 +89,7 @@ void slave(void)
 	seq = 0;
 	refusetime = 0;
 	adjtimes = 0;
+	cadr.s_addr = 0;
 
 	(void)gettimeofday(&ntime, 0);
 	electiontime = ntime.tv_sec + delay2;

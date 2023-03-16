@@ -343,6 +343,7 @@ loop:
 				    htp->name, inet_ntoa(htp->addr.sin_addr));
 				(void)remmach(htp);
 			}
+			/* Should this really fall through? */
 
 		case TSP_TEST:
 			if (trace) {

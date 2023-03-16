@@ -165,7 +165,7 @@ adjclock(struct timeval *corr)
 		}
 	} else {
 		syslog(LOG_WARNING,
-		       "clock correction %d sec too large to adjust",
+		       "clock correction %ld sec too large to adjust",
 		       adj.tv_sec);
 		(void) gettimeofday(&now, 0);
 		timevaladd(&now, corr);
